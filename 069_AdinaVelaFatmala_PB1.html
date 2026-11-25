@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Registrasi</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            margin: 30px auto;
+            max-width: 760px;
+            color: #222;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 22px;
+            margin-bottom: 25px;
+        }
+
+        form {
+            width: min(100%, 520px);
+            margin: auto;
+        }
+
+        .baris {
+            display: grid;
+            grid-template-columns: 130px 1fr;
+            gap: 10px;
+            margin: 12px 0;
+            align-items: start;
+        }
+
+        label {
+            padding-top: 6px;
+        }
+
+        input, textarea, select {
+            box-sizing: border-box;
+            width: 100%;
+            padding: 7px;
+            border: 1px solid #aaa;
+            border-radius: 3px;
+            font: inherit;
+        }
+
+        textarea {
+            height: 75px;
+            resize: vertical;
+        }
+
+        .tombol {
+            margin-left: 140px;
+            display: flex;
+            gap: 8px;
+        }
+
+        button {
+            padding: 7px 15px;
+            cursor: pointer;
+        }
+
+        .pesan {
+            color: #b00020;
+            margin: 12px 0 0 140px;
+        }
+
+        .hasil {
+            margin: 20px auto;
+            max-width: 520px;
+            padding: 12px;
+            background: #e8f5e9;
+            border: 1px solid #81c784;
+            display: none;
+        }
+
+        @media (max-width: 520px) {
+            body {
+                margin: 16px;
+            }
+
+            .baris {
+                grid-template-columns: 1fr;
+                gap: 4px;
+            }
+
+            .tombol, .pesan {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>FORM REGISTRASI</h2>
+
+    <form id="formRegistrasi">
+
+        <div class="baris">
+            <label for="nama">Nama</label>
+            <input
+                id="nama"
+                name="nama"
+                type="text"
+                placeholder="Masukkan Nama"
+                required
+            >
+        </div>
+
+        <div class="baris">
+            <label for="alamat">Alamat</label>
+            <textarea
+                id="alamat"
+                name="alamat"
+                placeholder="Masukkan Alamat"
+                required
+            ></textarea>
+        </div>
+
+        <div class="baris">
+            <label for="tanggal">Tanggal Lahir</label>
+            <input
+                id="tanggal"
+                name="tanggal"
+                type="date"
+            >
+        </div>
+
+        <div class="baris">
+            <label for="telepon">Telepon</label>
+            <input
+                id="telepon"
+                name="telepon"
+                type="tel"
+                placeholder="Masukkan No. Telp"
+                required
+                pattern="[0-9+() -]{8,20}"
+                title="Masukkan nomor telepon yang benar."
+            >
+        </div>
+
+        <div class="baris">
+            <label for="url">URL</label>
+            <input
+                id="url"
+                name="url"
+                type="url"
+                placeholder="Masukkan alamat Web"
+            >
+        </div>
+
+        <div class="baris">
+            <label for="email">Email</label>
+            <input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="Masukkan Email"
+            >
+        </div>
+
+        <div class="baris">
+            <label for="jurusan">Jurusan</label>
+
+            <select id="jurusan" name="jurusan">
+                <option value="Teknik Informatika">
+                    Teknik Informatika
+                </option>
+
+                <option value="Sistem Informasi">
+                    Sistem Informasi
+                </option>
+
+                <option value="Bisnis Digital">
+                    Bisnis Digital
+                </option>
+
+                <option value="Manajemen">
+                    Manajemen
+                </option>
+            </select>
+        </div>
+
+        <div class="tombol">
+            <button type="submit">Kirim</button>
+            <button type="reset">Batal</button>
+        </div>
+
+        <p class="pesan" id="pesan" role="alert"></p>
+
+    </form>
+
+    <div class="hasil" id="hasil" aria-live="polite"></div>
+
+    <script>
+        const form = document.getElementById('formRegistrasi');
+        const pesan = document.getElementById('pesan');
+        const hasil = document.getElementById('hasil');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            pesan.textContent = '';
+            hasil.style.display = 'none';
+
+            // Memeriksa data wajib
+            if (
+                !form.nama.value.trim() ||
+                !form.alamat.value.trim() ||
+                !form.telepon.value.trim()
+            ) {
+                pesan.textContent =
+                    'Nama, alamat, dan nomor telepon wajib diisi.';
+                return;
+            }
+
+            // Memeriksa format input
+            if (!form.checkValidity()) {
+                form.reportValidity();
+
+                pesan.textContent =
+                    'Periksa kembali format nomor telepon, URL, atau email.';
+                return;
+            }
+
+            // Menampilkan hasil registrasi
+            hasil.innerHTML =
+                '<strong>Registrasi berhasil!</strong><br>' +
+                'Nama: ' + aman(form.nama.value) + '<br>' +
+                'Alamat: ' + aman(form.alamat.value).replace(/\n/g, '<br>') + '<br>' +
+                'Tanggal lahir: ' + (form.tanggal.value || '-') + '<br>' +
+                'Telepon: ' + aman(form.telepon.value) + '<br>' +
+                'URL: ' + aman(form.url.value || '-') + '<br>' +
+                'Email: ' + aman(form.email.value || '-') + '<br>' +
+                'Jurusan: ' + aman(form.jurusan.value);
+
+            hasil.style.display = 'block';
+        });
+
+        // Tombol batal
+        form.addEventListener('reset', function() {
+            pesan.textContent = '';
+            hasil.style.display = 'none';
+        });
+
+        // Mengamankan teks sebelum ditampilkan
+        function aman(teks) {
+            return String(teks).replace(/[&<>"']/g, function(karakter) {
+                return {
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    '"': '&quot;',
+                    "'": '&#39;'
+                }[karakter];
+            });
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Layout Website Sederhana</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 20px auto;
+            max-width: 1000px;
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+            color: #222;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed;
+        }
+
+        td {
+            border: 1px solid #999;
+            padding: 12px;
+            vertical-align: top;
+        }
+
+        .header {
+            height: 115px;
+            background: #5b7bea;
+            text-align: center;
+            vertical-align: middle;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .menu {
+            background: #62e600;
+            text-align: center;
+            vertical-align: middle;
+            font-weight: bold;
+            padding: 10px 4px;
+        }
+
+        .menu a {
+            display: block;
+            color: #222;
+            text-decoration: none;
+        }
+
+        .isi {
+            background: #ffff72;
+        }
+
+        .logo {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .footer {
+            background: #eee;
+            text-align: center;
+            vertical-align: middle;
+            height: 75px;
+        }
+
+        h3 {
+            margin-top: 0;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        a {
+            color: #234b8a;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                margin: 8px;
+                font-size: 12px;
+            }
+
+            td {
+                padding: 7px;
+            }
+
+            .header {
+                height: 85px;
+                font-size: 18px;
+            }
+
+            .logo {
+                width: 60px;
+                height: 60px;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <table>
+
+        <!-- HEADER -->
+        <tr>
+            <td class="header" colspan="4">
+                HEADER
+            </td>
+        </tr>
+
+        <!-- MENU NAVIGASI -->
+        <tr>
+            <td class="menu">
+                <a href="#home">HOME</a>
+            </td>
+
+            <td class="menu">
+                <a href="#profile">PROFILE</a>
+            </td>
+
+            <td class="menu">
+                <a href="#galeri">GALERI</a>
+            </td>
+
+            <td class="menu">
+                <a href="#contact">CONTACT</a>
+            </td>
+        </tr>
+
+        <!-- KONTEN WEBSITE -->
+        <tr class="isi">
+
+            <!-- KOLOM LOGO -->
+            <td id="home" style="width: 25%;">
+
+                <img
+                    class="logo"
+                    src="https://zonalogo.com/assets/logo-universitas-muhammadiyah-sidoarjo-umsida-png-svg.webp"
+                    alt="Logo kampus"
+                >
+
+            </td>
+
+            <!-- KOLOM PROFILE -->
+            <td
+                id="profile"
+                colspan="2"
+                style="width: 50%;"
+            >
+
+                <h3>
+                    Selamat datang di website sederhana saya
+                </h3>
+
+                <p>
+                    Website ini dibuat sebagai contoh layout
+                    menggunakan tabel HTML.
+                </p>
+
+                <h3>Program Studi</h3>
+
+                <p>
+                    Selamat datang di halaman utama website.
+                    Silakan pilih menu yang tersedia untuk
+                    melihat informasi lainnya.
+                </p>
+
+                <ul>
+                    <li>
+                        <a href="#profile">Profil Kampus</a>
+                    </li>
+
+                    <li>
+                        <a href="#profile">
+                            Informasi Akademik dan Kemahasiswaan
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#profile">
+                            Jadwal Perkuliahan
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#profile">Pengumuman</a>
+                    </li>
+
+                    <li>
+                        <a href="#profile">
+                            Kegiatan Mahasiswa
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#profile">Data Dosen</a>
+                    </li>
+
+                    <li>
+                        <a href="#contact">Kontak</a>
+                    </li>
+                </ul>
+
+                <h3>Program Pendidikan</h3>
+
+                <p>
+                    Beberapa program pendidikan yang tersedia:
+                </p>
+
+                <ul>
+                    <li>Program Diploma</li>
+                    <li>Program Pendidikan Sarjana</li>
+                </ul>
+
+            </td>
+
+            <!-- KOLOM CONTACT -->
+            <td id="contact" style="width: 25%;">
+
+                <h3>Link</h3>
+
+                <ul>
+                    <li>
+                        <a href="#home">Menu Utama</a>
+                    </li>
+
+                    <li>
+                        <a href="#profile">Data Akademik</a>
+                    </li>
+                </ul>
+
+            </td>
+
+        </tr>
+
+        <!-- FOOTER -->
+        <tr>
+            <td class="footer" colspan="4">
+
+                COPYRIGHT © 2026 NAMA MAHASISWA
+
+                <br><br>
+
+                Tugas Besar 1 - Desain Web
+
+            </td>
+        </tr>
+
+    </table>
+
+</body>
+
+</html>
